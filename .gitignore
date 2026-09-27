@@ -1,0 +1,55 @@
+# ── Environment / secrets ──────────────────────────
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.crt
+config/secrets.yaml
+config/secrets.yml
+
+# ── Go build artifacts ──────────────────────────────
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+main
+main.exe
+/bin/
+/dist/
+
+# ── Go test / coverage ──────────────────────────────
+*.test
+*.out
+coverage.html
+
+# ── Dependency directories ──────────────────────────
+vendor/
+
+# ── Docker ───────────────────────────────────────────
+docker-compose.override.yml
+*.env.docker
+
+# ── Kubernetes ───────────────────────────────────────
+k8s/secrets/
+k8s/*secret*.yaml
+k8s/*secret*.yml
+
+# ── Logs ─────────────────────────────────────────────
+*.log
+logs/
+
+# ── IDE / editor ─────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── OS files ─────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Generated docs (optional — remove if you want Swagger JSON tracked) ──
+docs/swagger.json
+docs/swagger.yaml

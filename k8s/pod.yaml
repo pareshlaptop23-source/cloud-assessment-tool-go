@@ -1,0 +1,13 @@
+apiVersion: v1
+
+kind: Pod
+
+metadata:
+  name: cloudtool-pod
+
+spec:
+  containers:
+    - name: cloudtool-container
+      image: paresh0101/cloudtool:v11
+      ports:
+        - containerPort: 8080

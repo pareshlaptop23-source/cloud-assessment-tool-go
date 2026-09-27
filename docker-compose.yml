@@ -1,0 +1,61 @@
+services:
+
+  app:
+    build: .
+    image: paresh0101/cloudtool:latest
+    container_name: cloud-api
+
+    ports:
+      - "8080:8080"
+
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+    environment:
+      DB_HOST: mysql
+      DB_PORT: "3306"
+      DB_USER: root
+      DB_PASSWORD: pass123
+      DB_NAME: cloudtool
+
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+
+  mysql:
+    image: mysql:8
+    container_name: mysql-db
+
+    environment:
+      MYSQL_ROOT_PASSWORD: pass123
+      MYSQL_DATABASE: cloudtool
+
+    ports:
+      - "3307:3306"
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-ppass123"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:7
+    container_name: cloudtool-redis
+
+    ports:
+      - "6379:6379"
+
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  mysql_data:
